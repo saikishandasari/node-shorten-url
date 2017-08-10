@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Shorten URL</title>
+    <script>
+        function postURL(){
+            var xhttp = new XMLHttpRequest();
+            var reqURL = "reqURL=" + document.getElementById("reqURL").value;
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("newURL").setAttribute("href",this.responseText);
+                    document.getElementById("newURL").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "/", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");            
+            xhttp.send(reqURL);
+        }
+    </script>   
+</head>
+<body>
+    <input type="text" id="reqURL" placeholder="Paste your URL here">
+    <button onclick="postURL()">Shorten</button>
+    <a id="newURL"></a>
+</body>
+</html>
